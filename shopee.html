@@ -1,0 +1,3826 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SchoolMart - Peralatan Sekolah</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#333;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#ee4d2d;
+    color:white;
+    padding:15px 6%;
+    display:flex;
+    align-items:center;
+    gap:25px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.search-box{
+    flex:1;
+    display:flex;
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+}
+
+.search-box input{
+    width:100%;
+    border:none;
+    outline:none;
+    padding:12px 15px;
+    font-size:14px;
+}
+
+.search-box button{
+    border:none;
+    background:#fff;
+    color:#ee4d2d;
+    padding:0 20px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.cart-button{
+    border:none;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+    font-size:25px;
+    position:relative;
+}
+
+.cart-count{
+    position:absolute;
+    top:-8px;
+    right:-10px;
+    background:#fff;
+    color:#ee4d2d;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:88%;
+    max-width:1200px;
+    margin:auto;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    margin-top:25px;
+    background:linear-gradient(135deg,#ff6b4a,#ee4d2d);
+    color:white;
+    padding:45px 35px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.hero h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:16px;
+    opacity:.95;
+}
+
+.hero button{
+    border:none;
+    background:white;
+    color:#ee4d2d;
+    padding:13px 22px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    margin-top:35px;
+}
+
+.section-title{
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+/* =========================
+   VOUCHER
+========================= */
+
+.voucher-box{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.voucher{
+    border:2px dashed #ee4d2d;
+    border-radius:10px;
+    padding:15px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    gap:10px;
+    min-height:160px;
+    background:#fff;
+}
+
+.voucher h3{
+    color:#ee4d2d;
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+.voucher p{
+    color:#666;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.voucher-discount{
+    color:#ee4d2d;
+    font-size:20px;
+    font-weight:800;
+}
+
+.voucher button{
+    border:1px solid #ee4d2d;
+    background:white;
+    color:#ee4d2d;
+    padding:9px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+    width:100%;
+}
+
+.voucher button:hover{
+    background:#ee4d2d;
+    color:white;
+}
+
+.active-voucher{
+    grid-column:1 / -1;
+    background:#fff1ed;
+    padding:13px;
+    border-radius:8px;
+    color:#ee4d2d;
+    font-weight:bold;
+}
+
+.active-voucher button{
+    margin-left:10px;
+    border:none;
+    background:#ee4d2d;
+    color:white;
+    padding:7px 12px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.product-image{
+    width:100%;
+    aspect-ratio:1 / 1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fafafa;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:14px;
+}
+
+.product-info h3{
+    font-size:15px;
+    min-height:40px;
+    margin-bottom:7px;
+}
+
+.price{
+    color:#ee4d2d;
+    font-size:18px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.stock{
+    color:#2e7d32;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.add-btn{
+    width:100%;
+    padding:10px;
+    border:1px solid #ee4d2d;
+    background:white;
+    color:#ee4d2d;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.add-btn:hover{
+    background:#ee4d2d;
+    color:white;
+}
+
+/* =========================
+   ORDERS
+========================= */
+
+.order-box{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.07);
+}
+
+.order-empty{
+    text-align:center;
+    color:#888;
+    padding:25px;
+}
+
+.order-card{
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:12px;
+}
+
+.order-card:last-child{
+    margin-bottom:0;
+}
+
+.order-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.order-id{
+    font-weight:bold;
+    color:#ee4d2d;
+}
+
+.order-status{
+    background:#e8f5e9;
+    color:#2e7d32;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.order-info{
+    color:#555;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-content{
+    background:white;
+    width:100%;
+    max-width:600px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:14px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:12px;
+    font-size:28px;
+    color:#777;
+    cursor:pointer;
+}
+
+.modal-title{
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+/* =========================
+   CART
+========================= */
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border-bottom:1px solid #eee;
+    padding:14px 0;
+}
+
+.cart-item img{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:8px;
+    background:#f5f5f5;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info h4{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.cart-item-price{
+    color:#ee4d2d;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.quantity button{
+    width:27px;
+    height:27px;
+    border:1px solid #ddd;
+    background:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.remove-btn{
+    border:none;
+    background:none;
+    color:#999;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.cart-summary{
+    margin-top:20px;
+    border-top:1px solid #ddd;
+    padding-top:15px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+.summary-row.total{
+    font-size:19px;
+    font-weight:800;
+    color:#ee4d2d;
+    border-top:1px solid #ddd;
+    padding-top:12px;
+}
+
+.checkout-btn{
+    width:100%;
+    border:none;
+    background:#ee4d2d;
+    color:white;
+    padding:13px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.checkout-btn:hover{
+    background:#d84325;
+}
+
+.empty-cart{
+    text-align:center;
+    padding:35px;
+    color:#888;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    width:100%;
+    padding:11px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    outline:none;
+    font-size:14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+    border-color:#ee4d2d;
+}
+
+.form-group textarea{
+    resize:vertical;
+    min-height:80px;
+}
+
+/* =========================
+   PAYMENT
+========================= */
+
+.payment-options{
+    display:grid;
+    gap:10px;
+    margin-top:10px;
+}
+
+.payment-option{
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:12px;
+    cursor:pointer;
+}
+
+.payment-option:hover{
+    border-color:#ee4d2d;
+}
+
+.payment-option input{
+    margin-right:8px;
+}
+
+.payment-info{
+    background:#fff7f4;
+    border:1px solid #ffd5cc;
+    padding:13px;
+    border-radius:8px;
+    margin-top:10px;
+    font-size:13px;
+    line-height:1.6;
+    display:none;
+}
+
+/* =========================
+   SHOE SIZE
+========================= */
+
+.size-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+
+.size-btn{
+    padding:12px;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.size-btn:hover,
+.size-btn.selected{
+    background:#ee4d2d;
+    color:white;
+    border-color:#ee4d2d;
+}
+
+.selected-size{
+    margin-top:15px;
+    color:#ee4d2d;
+    font-weight:bold;
+}
+
+.add-size-btn{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    background:#ee4d2d;
+    color:white;
+    border:none;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#333;
+    color:white;
+    padding:12px 20px;
+    border-radius:8px;
+    z-index:5000;
+    opacity:0;
+    transition:.3s;
+    pointer-events:none;
+}
+
+#toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:50px;
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:25px;
+    font-size:14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .product-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .voucher-box{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    header{
+        flex-wrap:wrap;
+        padding:12px 4%;
+        gap:12px;
+    }
+
+    .logo{
+        font-size:21px;
+    }
+
+    .search-box{
+        order:3;
+        flex-basis:100%;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .hero{
+        padding:30px 20px;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .voucher-box{
+        grid-template-columns:1fr;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .product-info{
+        padding:10px;
+    }
+
+    .product-info h3{
+        font-size:13px;
+    }
+
+    .price{
+        font-size:16px;
+    }
+
+    .modal-content{
+        padding:20px;
+    }
+
+}
+
+@media(max-width:400px){
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        SchoolMart
+    </div>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari peralatan sekolah..."
+        >
+
+        <button onclick="searchProduct()">
+            🔍
+        </button>
+    </div>
+
+    <button class="cart-button" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+</header>
+
+
+<div class="container">
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div>
+        <h1>Lengkapi Peralatan Sekolahmu!</h1>
+
+        <p>
+            Temukan berbagai kebutuhan sekolah dengan harga terjangkau.
+        </p>
+    </div>
+
+    <button onclick="scrollToProducts()">
+        Belanja Sekarang
+    </button>
+
+</section>
+
+
+<!-- =========================
+     VOUCHER
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+        Voucher & Promo
+    </div>
+
+    <div class="voucher-box">
+
+        <div class="voucher">
+
+            <div>
+                <h3>HEMAT10</h3>
+
+                <p>
+                    Diskon Rp10.000 untuk pembelian
+                    minimal Rp50.000
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                Rp10.000
+            </div>
+
+            <button
+                onclick="useVoucher('HEMAT10','fixed',10000,50000)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div class="voucher">
+
+            <div>
+                <h3>PELAJAR15</h3>
+
+                <p>
+                    Diskon Rp15.000 untuk pembelian
+                    minimal Rp75.000
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                Rp15.000
+            </div>
+
+            <button
+                onclick="useVoucher('PELAJAR15','fixed',15000,75000)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div class="voucher">
+
+            <div>
+                <h3>SEKOLAH20</h3>
+
+                <p>
+                    Diskon Rp20.000 untuk pembelian
+                    minimal Rp100.000
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                Rp20.000
+            </div>
+
+            <button
+                onclick="useVoucher('SEKOLAH20','fixed',20000,100000)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div class="voucher">
+
+            <div>
+                <h3>NEWUSER2</h3>
+
+                <p>
+                    Diskon 2% untuk pengguna baru
+                    tanpa minimum pembelian
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                2%
+            </div>
+
+            <button
+                onclick="useVoucher('NEWUSER2','percent',2,0)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div class="voucher">
+
+            <div>
+                <h3>PESTA50</h3>
+
+                <p>
+                    Diskon Rp50.000 untuk pembelian
+                    minimal Rp200.000
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                Rp50.000
+            </div>
+
+            <button
+                onclick="useVoucher('PESTA50','fixed',50000,200000)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div class="voucher">
+
+            <div>
+                <h3>HEMAT75</h3>
+
+                <p>
+                    Diskon Rp75.000 untuk pembelian
+                    minimal Rp300.000
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                Rp75.000
+            </div>
+
+            <button
+                onclick="useVoucher('HEMAT75','fixed',75000,300000)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div class="voucher">
+
+            <div>
+                <h3>BIG100</h3>
+
+                <p>
+                    Diskon Rp100.000 untuk pembelian
+                    minimal Rp400.000
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                Rp100.000
+            </div>
+
+            <button
+                onclick="useVoucher('BIG100','fixed',100000,400000)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div class="voucher">
+
+            <div>
+                <h3>SCHOOL150</h3>
+
+                <p>
+                    Diskon Rp150.000 untuk pembelian
+                    minimal Rp600.000
+                </p>
+            </div>
+
+            <div class="voucher-discount">
+                Rp150.000
+            </div>
+
+            <button
+                onclick="useVoucher('SCHOOL150','fixed',150000,600000)"
+            >
+                Pakai Voucher
+            </button>
+
+        </div>
+
+
+        <div id="activeVoucher"></div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section class="section" id="products">
+
+    <div class="section-title">
+        Peralatan Sekolah
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+
+        <!-- 1 -->
+
+        <div
+            class="card"
+            data-name="tas dokumen pink"
+        >
+
+            <div class="product-image">
+                <img
+                    src="tas dokumen.jpeg"
+                    alt="Tas Dokumen Pink"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Tas Dokumen Pink</h3>
+
+                <div class="price">
+                    Rp14.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Tas Dokumen Pink',14500,'tas dokumen.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 2 -->
+
+        <div class="card" data-name="sweetbread totebag">
+
+            <div class="product-image">
+                <img
+                    src="sweetbread totebag.jpeg"
+                    alt="Sweetbread Totebag"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Sweetbread Totebag</h3>
+
+                <div class="price">
+                    Rp32.000
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Sweetbread Totebag',32000,'sweetbread totebag.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 3 -->
+
+        <div class="card" data-name="one piace sticky note">
+
+            <div class="product-image">
+                <img
+                    src="stickynoteonepiace.jpeg"
+                    alt="One Piace Sticky Note"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>One Piace Sticky Note</h3>
+
+                <div class="price">
+                    Rp10.000
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('One Piace Sticky Note',10000,'stickynoteonepiace.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="card" data-name="color pen 24pcs">
+
+            <div class="product-image">
+                <img
+                    src="colorpen24pcs.jpeg"
+                    alt="Color Pen 24pcs"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Color Pen 24pcs</h3>
+
+                <div class="price">
+                    Rp22.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Color Pen 24pcs',22500,'colorpen24pcs.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="card" data-name="acrylic pen 6pcs">
+
+            <div class="product-image">
+                <img
+                    src="acrylic pen 6pcs.jpeg"
+                    alt="Acrylic Pen 6pcs"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Acrylic Pen 6pcs</h3>
+
+                <div class="price">
+                    Rp46.000
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Acrylic Pen 6pcs',46000,'acrylic pen 6pcs.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 6 -->
+
+        <div class="card" data-name="yellow bear notebook">
+
+            <div class="product-image">
+                <img
+                    src="bearnotebook.jpeg"
+                    alt="Yellow Bear Notebook"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Yellow Bear Notebook</h3>
+
+                <div class="price">
+                    Rp43.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Yellow Bear Notebook',43500,'bearnotebook.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 7 -->
+
+        <div class="card" data-name="ghrapic totebag">
+
+            <div class="product-image">
+                <img
+                    src="totebagghrapic.jpeg"
+                    alt="Ghrapic Totebag"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Ghrapic Totebag</h3>
+
+                <div class="price">
+                    Rp32.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Ghrapic Totebag',32500,'totebagghrapic.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 8 -->
+
+        <div class="card" data-name="dino backpack">
+
+            <div class="product-image">
+                <img
+                    src="dinobackpack.jpeg"
+                    alt="Dino Backpack"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Dino Backpack</h3>
+
+                <div class="price">
+                    Rp89.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Dino Backpack',89500,'dinobackpack.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 9 -->
+
+        <div class="card" data-name="dual highlighter 6pcs">
+
+            <div class="product-image">
+                <img
+                    src="Dualhighlighter 6pcs.jpeg"
+                    alt="Dual Highlighter 6pcs"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Dual Highlighter 6pcs</h3>
+
+                <div class="price">
+                    Rp18.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Dual Highlighter 6pcs',18500,'Dualhighlighter 6pcs.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 10 -->
+
+        <div class="card" data-name="gunting spongebob">
+
+            <div class="product-image">
+                <img
+                    src="gunting spongebob.jpeg"
+                    alt="Gunting Spongebob"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Gunting Spongebob</h3>
+
+                <div class="price">
+                    Rp12.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Gunting Spongebob',12500,'gunting spongebob.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 11 -->
+
+        <div class="card" data-name="gunting start pink">
+
+            <div class="product-image">
+                <img
+                    src="gunting start pink.jpeg"
+                    alt="Gunting Start Pink"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Gunting Start Pink</h3>
+
+                <div class="price">
+                    Rp10.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Gunting Start Pink',10500,'gunting start pink.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 12 -->
+
+        <div class="card" data-name="gunting sekolah">
+
+            <div class="product-image">
+                <img
+                    src="gunting.jpeg"
+                    alt="Gunting Sekolah"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Gunting Sekolah</h3>
+
+                <div class="price">
+                    Rp8.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Gunting Sekolah',8500,'gunting.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 13 -->
+
+        <div class="card" data-name="jangka">
+
+            <div class="product-image">
+                <img
+                    src="jangka.jpeg"
+                    alt="Jangka"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Jangka</h3>
+
+                <div class="price">
+                    Rp15.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Jangka',15500,'jangka.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 14 -->
+
+        <div class="card" data-name="jepitan kertas">
+
+            <div class="product-image">
+                <img
+                    src="jepitan kertas.jpeg"
+                    alt="Jepitan Kertas"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Jepitan Kertas</h3>
+
+                <div class="price">
+                    Rp7.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Jepitan Kertas',7500,'jepitan kertas.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 15 -->
+
+        <div class="card" data-name="kaus kaki hitam">
+
+            <div class="product-image">
+                <img
+                    src="kaus kaki hitam.jpeg"
+                    alt="Kaus Kaki Hitam"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Kaus Kaki Hitam</h3>
+
+                <div class="price">
+                    Rp15.000
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Kaus Kaki Hitam',15000,'kaus kaki hitam.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 16 -->
+
+        <div class="card" data-name="notebook piace">
+
+            <div class="product-image">
+                <img
+                    src="notebook piace.jpeg"
+                    alt="Notebook Piace"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Notebook Piace</h3>
+
+                <div class="price">
+                    Rp28.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Notebook Piace',28500,'notebook piace.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 17 -->
+
+        <div class="card" data-name="papan tulis kecil">
+
+            <div class="product-image">
+                <img
+                    src="papan tulis kecil.jpeg"
+                    alt="Papan Tulis Kecil"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Papan Tulis Kecil</h3>
+
+                <div class="price">
+                    Rp25.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Papan Tulis Kecil',25500,'papan tulis kecil.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 18 -->
+
+        <div class="card" data-name="penggaris">
+
+            <div class="product-image">
+                <img
+                    src="penggaris.jpeg"
+                    alt="Penggaris"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Penggaris</h3>
+
+                <div class="price">
+                    Rp6.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Penggaris',6500,'penggaris.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 19 -->
+
+        <div class="card" data-name="pulpen buah buahan">
+
+            <div class="product-image">
+                <img
+                    src="pulpen buah buahan.jpeg"
+                    alt="Pulpen Buah-Buahan"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Pulpen Buah-Buahan</h3>
+
+                <div class="price">
+                    Rp9.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Pulpen Buah-Buahan',9500,'pulpen buah buahan.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 20 -->
+
+        <div class="card" data-name="pulpen pastel">
+
+            <div class="product-image">
+                <img
+                    src="pulpenpstel.jpeg"
+                    alt="Pulpen Pastel"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Pulpen Pastel</h3>
+
+                <div class="price">
+                    Rp12.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Pulpen Pastel',12500,'pulpenpstel.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 21 -->
+
+        <div class="card" data-name="scissorol">
+
+            <div class="product-image">
+                <img
+                    src="scissorol.jpeg"
+                    alt="Scissorol"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Scissorol</h3>
+
+                <div class="price">
+                    Rp13.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Scissorol',13500,'scissorol.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 22 SEPATU -->
+
+        <div class="card" data-name="sepatu sekolah hitam">
+
+            <div class="product-image">
+                <img
+                    src="sepatu sekolah hitam.jpeg"
+                    alt="Sepatu Sekolah Hitam"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Sepatu Sekolah Hitam</h3>
+
+                <div class="price">
+                    Rp125.000
+                </div>
+
+                <div class="stock">
+                    Ukuran 36 - 44
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="openShoeModal()"
+                >
+                    Pilih Ukuran
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 23 -->
+
+        <div class="card" data-name="alat tulis pinguin">
+
+            <div class="product-image">
+                <img
+                    src="alat tulis pinguin.jpeg"
+                    alt="Alat Tulis Pinguin"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Alat Tulis Pinguin</h3>
+
+                <div class="price">
+                    Rp35.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Alat Tulis Pinguin',35500,'alat tulis pinguin.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 24 -->
+
+        <div class="card" data-name="art painting marker">
+
+            <div class="product-image">
+                <img
+                    src="artpaintingmarker.jpeg"
+                    alt="Art Painting Marker"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Art Painting Marker</h3>
+
+                <div class="price">
+                    Rp42.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Art Painting Marker',42500,'artpaintingmarker.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 25 -->
+
+        <div class="card" data-name="backpack">
+
+            <div class="product-image">
+                <img
+                    src="backpack (2).jpeg"
+                    alt="Backpack"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Backpack</h3>
+
+                <div class="price">
+                    Rp95.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Backpack',95500,'backpack (2).jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 26 -->
+
+        <div class="card" data-name="school backpack">
+
+            <div class="product-image">
+                <img
+                    src="backpack.jpeg"
+                    alt="School Backpack"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>School Backpack</h3>
+
+                <div class="price">
+                    Rp105.000
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('School Backpack',105000,'backpack.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 27 -->
+
+        <div class="card" data-name="blue backpack">
+
+            <div class="product-image">
+                <img
+                    src="bluebackpack.jpeg"
+                    alt="Blue Backpack"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Blue Backpack</h3>
+
+                <div class="price">
+                    Rp92.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Blue Backpack',92500,'bluebackpack.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 28 -->
+
+        <div class="card" data-name="board marker">
+
+            <div class="product-image">
+                <img
+                    src="boardmarker.jpeg"
+                    alt="Board Marker"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Board Marker</h3>
+
+                <div class="price">
+                    Rp11.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Board Marker',11500,'boardmarker.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 29 -->
+
+        <div class="card" data-name="bread tote bag">
+
+            <div class="product-image">
+                <img
+                    src="bread totebag.jpeg"
+                    alt="Bread Tote Bag"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Bread Tote Bag</h3>
+
+                <div class="price">
+                    Rp32.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Bread Tote Bag',32500,'bread totebag.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 30 -->
+
+        <div class="card" data-name="buku tulis sampul aesthetic">
+
+            <div class="product-image">
+                <img
+                    src="bukuk tulis sampul aestatic.jpeg"
+                    alt="Buku Tulis Sampul Aesthetic"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Buku Tulis Sampul Aesthetic</h3>
+
+                <div class="price">
+                    Rp17.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Buku Tulis Sampul Aesthetic',17500,'bukuk tulis sampul aestatic.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 31 -->
+
+        <div class="card" data-name="capybara gunting stapler tip roller">
+
+            <div class="product-image">
+                <img
+                    src="capybara gunting,straples,tiprool.jpeg"
+                    alt="Capybara Gunting Stapler Tip Roller"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Capybara Gunting, Stapler & Tip Roller</h3>
+
+                <div class="price">
+                    Rp38.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Capybara Gunting, Stapler & Tip Roller',38500,'capybara gunting,straples,tiprool.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 32 -->
+
+        <div class="card" data-name="cat warna air 18 warna">
+
+            <div class="product-image">
+                <img
+                    src="cat warna air 18 warna.jpeg"
+                    alt="Cat Warna Air 18 Warna"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Cat Warna Air 18 Warna</h3>
+
+                <div class="price">
+                    Rp29.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Cat Warna Air 18 Warna',29500,'cat warna air 18 warna.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- 33 -->
+
+        <div class="card" data-name="color pen 6pcs">
+
+            <div class="product-image">
+                <img
+                    src="color pen 6pcs.jpeg"
+                    alt="Color Pen 6pcs"
+                >
+            </div>
+
+            <div class="product-info">
+
+                <h3>Color Pen 6pcs</h3>
+
+                <div class="price">
+                    Rp9.500
+                </div>
+
+                <div class="stock">
+                    Stok tersedia
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart('Color Pen 6pcs',9500,'color pen 6pcs.jpeg')"
+                >
+                    + Tambah
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     ORDERS
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+        Pesanan Saya
+    </div>
+
+    <div class="order-box" id="ordersContainer">
+
+        <div class="order-empty">
+            Belum ada pesanan.
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 SchoolMart - Peralatan Sekolah
+    </p>
+
+</footer>
+
+
+<!-- =========================
+     CART MODAL
+========================= -->
+
+<div class="modal" id="cartModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeCart()">
+            &times;
+        </span>
+
+        <div class="modal-title">
+            Keranjang Belanja
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-summary">
+
+            <div class="summary-row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span id="cartSubtotal">
+                    Rp0
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Diskon
+                </span>
+
+                <span id="cartDiscount">
+                    -Rp0
+                </span>
+
+            </div>
+
+
+            <div class="summary-row total">
+
+                <span>
+                    Total
+                </span>
+
+                <span id="cartTotal">
+                    Rp0
+                </span>
+
+            </div>
+
+            <button
+                class="checkout-btn"
+                onclick="openCheckout()"
+            >
+                Checkout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CHECKOUT MODAL
+========================= -->
+
+<div class="modal" id="checkoutModal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeCheckout()">
+            &times;
+        </span>
+
+        <div class="modal-title">
+            Checkout Pesanan
+        </div>
+
+
+        <form id="checkoutForm" onsubmit="submitOrder(event)">
+
+            <div class="form-group">
+
+                <label>
+                    Nama Lengkap
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    required
+                    placeholder="Masukkan nama"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Nomor HP
+                </label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    required
+                    placeholder="08xxxxxxxxxx"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Alamat
+                </label>
+
+                <textarea
+                    id="customerAddress"
+                    required
+                    placeholder="Masukkan alamat lengkap"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Metode Pembayaran
+                </label>
+
+                <div class="payment-options">
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="COD"
+                            required
+                            onchange="showPaymentInfo()"
+                        >
+
+                        COD
+                        <small>
+                            - Bayar di tempat
+                        </small>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="Transfer Bank"
+                            onchange="showPaymentInfo()"
+                        >
+
+                        Transfer Bank
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="DANA"
+                            onchange="showPaymentInfo()"
+                        >
+
+                        DANA
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="OVO"
+                            onchange="showPaymentInfo()"
+                        >
+
+                        OVO
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="GoPay"
+                            onchange="showPaymentInfo()"
+                        >
+
+                        GoPay
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="QRIS"
+                            onchange="showPaymentInfo()"
+                        >
+
+                        QRIS
+
+                    </label>
+
+                </div>
+
+                <div
+                    class="payment-info"
+                    id="paymentInfo"
+                ></div>
+
+            </div>
+
+
+            <div class="cart-summary">
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span id="checkoutSubtotal">
+                        Rp0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Diskon
+                    </span>
+
+                    <span id="checkoutDiscount">
+                        -Rp0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row total">
+
+                    <span>
+                        Total Bayar
+                    </span>
+
+                    <span id="checkoutTotal">
+                        Rp0
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="checkout-btn"
+            >
+                Buat Pesanan
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SHOE SIZE MODAL
+========================= -->
+
+<div class="modal" id="shoeModal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeShoeModal()"
+        >
+            &times;
+        </span>
+
+        <div class="modal-title">
+            Pilih Ukuran Sepatu
+        </div>
+
+        <p>
+            Sepatu Sekolah Hitam
+        </p>
+
+        <div class="size-grid">
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(36,this)"
+            >
+                36
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(37,this)"
+            >
+                37
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(38,this)"
+            >
+                38
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(39,this)"
+            >
+                39
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(40,this)"
+            >
+                40
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(41,this)"
+            >
+                41
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(42,this)"
+            >
+                42
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(43,this)"
+            >
+                43
+            </button>
+
+            <button
+                class="size-btn"
+                onclick="selectShoeSize(44,this)"
+            >
+                44
+            </button>
+
+        </div>
+
+
+        <div
+            class="selected-size"
+            id="selectedSizeText"
+        >
+            Belum memilih ukuran
+        </div>
+
+
+        <button
+            class="add-size-btn"
+            onclick="addShoeToCart()"
+        >
+            Tambahkan ke Keranjang
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div id="toast"></div>
+
+
+<script>
+
+/* =========================
+   VARIABLES
+========================= */
+
+let cart = [];
+
+let activeVoucher = {
+    code:"",
+    type:"",
+    discount:0,
+    minimum:0
+};
+
+let orders = [];
+
+let selectedShoeSize = null;
+
+
+/* =========================
+   RUPIAH
+========================= */
+
+function rupiah(number){
+
+    return new Intl.NumberFormat(
+        "id-ID",
+        {
+            style:"currency",
+            currency:"IDR",
+            minimumFractionDigits:0
+        }
+    ).format(number);
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addToCart(name,price,image){
+
+    const existing = cart.find(
+        item => item.name === name
+    );
+
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+            name:name,
+            price:price,
+            image:image,
+            qty:1
+        });
+
+    }
+
+    updateCart();
+
+    showToast(name + " ditambahkan ke keranjang!");
+
+}
+
+
+/* =========================
+   CHANGE QUANTITY
+========================= */
+
+function changeQty(index,change){
+
+    cart[index].qty += change;
+
+    if(cart[index].qty <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+    updateCart();
+
+}
+
+
+/* =========================
+   REMOVE ITEM
+========================= */
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+
+    showToast("Produk dihapus dari keranjang.");
+
+}
+
+
+/* =========================
+   SUBTOTAL
+========================= */
+
+function getSubtotal(){
+
+    return cart.reduce(
+        (total,item) =>
+            total + (item.price * item.qty),
+        0
+    );
+
+}
+
+
+/* =========================
+   DISCOUNT
+========================= */
+
+function getDiscount(){
+
+    const subtotal = getSubtotal();
+
+    if(
+        activeVoucher.code &&
+        subtotal >= activeVoucher.minimum
+    ){
+
+        if(activeVoucher.type === "percent"){
+
+            return Math.round(
+                subtotal *
+                activeVoucher.discount /
+                100
+            );
+
+        }
+
+        return Math.min(
+            activeVoucher.discount,
+            subtotal
+        );
+
+    }
+
+    return 0;
+
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+function getTotal(){
+
+    return Math.max(
+        0,
+        getSubtotal() - getDiscount()
+    );
+
+}
+
+
+/* =========================
+   UPDATE CART
+========================= */
+
+function updateCart(){
+
+    const cartCount =
+        document.getElementById("cartCount");
+
+    const totalQty =
+        cart.reduce(
+            (total,item) =>
+                total + item.qty,
+            0
+        );
+
+    cartCount.textContent = totalQty;
+
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+
+    if(cart.length === 0){
+
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                Keranjang masih kosong.
+            </div>
+        `;
+
+    }else{
+
+        cartItems.innerHTML = cart.map(
+            (item,index) => `
+
+            <div class="cart-item">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                >
+
+                <div class="cart-item-info">
+
+                    <h4>
+                        ${item.name}
+                    </h4>
+
+                    <div class="cart-item-price">
+                        ${rupiah(item.price)}
+                    </div>
+
+                </div>
+
+                <div class="quantity">
+
+                    <button
+                        onclick="changeQty(${index},-1)"
+                    >
+                        −
+                    </button>
+
+                    <span>
+                        ${item.qty}
+                    </span>
+
+                    <button
+                        onclick="changeQty(${index},1)"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <button
+                    class="remove-btn"
+                    onclick="removeItem(${index})"
+                >
+                    ×
+                </button>
+
+            </div>
+
+        `
+        ).join("");
+
+    }
+
+
+    const subtotal =
+        getSubtotal();
+
+    const discount =
+        getDiscount();
+
+    const total =
+        getTotal();
+
+
+    document.getElementById(
+        "cartSubtotal"
+    ).textContent = rupiah(subtotal);
+
+
+    document.getElementById(
+        "cartDiscount"
+    ).textContent = "-" + rupiah(discount);
+
+
+    document.getElementById(
+        "cartTotal"
+    ).textContent = rupiah(total);
+
+
+    updateCheckoutSummary();
+
+}
+
+
+/* =========================
+   USE VOUCHER
+========================= */
+
+function useVoucher(
+    code,
+    type,
+    discount,
+    minimum
+){
+
+    const subtotal =
+        getSubtotal();
+
+
+    if(subtotal < minimum){
+
+        showToast(
+            "Belanja minimal " +
+            rupiah(minimum) +
+            " untuk menggunakan voucher " +
+            code
+        );
+
+        return;
+
+    }
+
+
+    activeVoucher = {
+        code:code,
+        type:type,
+        discount:discount,
+        minimum:minimum
+    };
+
+
+    const discountText =
+        type === "percent"
+        ? discount + "%"
+        : rupiah(discount);
+
+
+    document.getElementById(
+        "activeVoucher"
+    ).innerHTML = `
+
+        <div class="active-voucher">
+
+            ✓ Voucher ${code} digunakan
+            — Hemat ${discountText}
+
+            <button
+                type="button"
+                onclick="removeVoucher()"
+            >
+                Batalkan
+            </button>
+
+        </div>
+
+    `;
+
+
+    updateCart();
+
+    showToast(
+        "Voucher " +
+        code +
+        " berhasil digunakan!"
+    );
+
+}
+
+
+/* =========================
+   REMOVE VOUCHER
+========================= */
+
+function removeVoucher(){
+
+    activeVoucher = {
+        code:"",
+        type:"",
+        discount:0,
+        minimum:0
+    };
+
+
+    document.getElementById(
+        "activeVoucher"
+    ).innerHTML = "";
+
+
+    updateCart();
+
+    showToast("Voucher dibatalkan.");
+
+}
+
+
+/* =========================
+   OPEN CART
+========================= */
+
+function openCart(){
+
+    document.getElementById(
+        "cartModal"
+    ).style.display = "flex";
+
+}
+
+
+/* =========================
+   CLOSE CART
+========================= */
+
+function closeCart(){
+
+    document.getElementById(
+        "cartModal"
+    ).style.display = "none";
+
+}
+
+
+/* =========================
+   OPEN CHECKOUT
+========================= */
+
+function openCheckout(){
+
+    if(cart.length === 0){
+
+        showToast(
+            "Keranjang masih kosong."
+        );
+
+        return;
+
+    }
+
+
+    closeCart();
+
+    updateCheckoutSummary();
+
+
+    document.getElementById(
+        "checkoutModal"
+    ).style.display = "flex";
+
+}
+
+
+/* =========================
+   CLOSE CHECKOUT
+========================= */
+
+function closeCheckout(){
+
+    document.getElementById(
+        "checkoutModal"
+    ).style.display = "none";
+
+}
+
+
+/* =========================
+   CHECKOUT SUMMARY
+========================= */
+
+function updateCheckoutSummary(){
+
+    const subtotal =
+        getSubtotal();
+
+    const discount =
+        getDiscount();
+
+    const total =
+        getTotal();
+
+
+    const subtotalElement =
+        document.getElementById(
+            "checkoutSubtotal"
+        );
+
+    const discountElement =
+        document.getElementById(
+            "checkoutDiscount"
+        );
+
+    const totalElement =
+        document.getElementById(
+            "checkoutTotal"
+        );
+
+
+    if(subtotalElement){
+
+        subtotalElement.textContent =
+            rupiah(subtotal);
+
+    }
+
+
+    if(discountElement){
+
+        discountElement.textContent =
+            "-" + rupiah(discount);
+
+    }
+
+
+    if(totalElement){
+
+        totalElement.textContent =
+            rupiah(total);
+
+    }
+
+}
+
+
+/* =========================
+   PAYMENT INFO
+========================= */
+
+function showPaymentInfo(){
+
+    const selected =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    const info =
+        document.getElementById(
+            "paymentInfo"
+        );
+
+
+    if(!selected){
+
+        info.style.display = "none";
+
+        return;
+
+    }
+
+
+    const payment =
+        selected.value;
+
+
+    let text = "";
+
+
+    if(payment === "COD"){
+
+        text =
+            "Pembayaran dilakukan saat pesanan diterima.";
+
+    }
+
+    else if(payment === "Transfer Bank"){
+
+        text =
+            "Transfer ke rekening SchoolMart: BCA 1234567890 a.n. SchoolMart.";
+
+    }
+
+    else if(payment === "DANA"){
+
+        text =
+            "Kirim pembayaran ke DANA 081234567890 a.n. SchoolMart.";
+
+    }
+
+    else if(payment === "OVO"){
+
+        text =
+            "Kirim pembayaran ke OVO 081234567890 a.n. SchoolMart.";
+
+    }
+
+    else if(payment === "GoPay"){
+
+        text =
+            "Kirim pembayaran ke GoPay 081234567890 a.n. SchoolMart.";
+
+    }
+
+    else if(payment === "QRIS"){
+
+        text =
+            "Pembayaran QRIS akan dikonfirmasi setelah pembayaran berhasil.";
+
+    }
+
+
+    info.textContent = text;
+
+    info.style.display = "block";
+
+}
+
+
+/* =========================
+   SUBMIT ORDER
+========================= */
+
+function submitOrder(event){
+
+    event.preventDefault();
+
+
+    if(cart.length === 0){
+
+        showToast(
+            "Keranjang masih kosong."
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        document.getElementById(
+            "customerName"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "customerPhone"
+        ).value.trim();
+
+
+    const address =
+        document.getElementById(
+            "customerAddress"
+        ).value.trim();
+
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if(!payment){
+
+        showToast(
+            "Pilih metode pembayaran."
+        );
+
+        return;
+
+    }
+
+
+    const orderId =
+        "SM" +
+        Date.now().toString().slice(-8);
+
+
+    const order = {
+
+        id:orderId,
+
+        name:name,
+
+        phone:phone,
+
+        address:address,
+
+        payment:payment.value,
+
+        items:JSON.parse(
+            JSON.stringify(cart)
+        ),
+
+        subtotal:getSubtotal(),
+
+        discount:getDiscount(),
+
+        total:getTotal(),
+
+        voucher:
+            activeVoucher.code || "-",
+
+        date:
+            new Date().toLocaleString(
+                "id-ID"
+            ),
+
+        status:"Pesanan dibuat"
+
+    };
+
+
+    orders.unshift(order);
+
+
+    cart = [];
+
+
+    activeVoucher = {
+
+        code:"",
+        type:"",
+        discount:0,
+        minimum:0
+
+    };
+
+
+    document.getElementById(
+        "activeVoucher"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+        "checkoutForm"
+    ).reset();
+
+
+    document.getElementById(
+        "paymentInfo"
+    ).style.display = "none";
+
+
+    updateCart();
+
+    displayOrders();
+
+    closeCheckout();
+
+
+    showToast(
+        "Pesanan berhasil dibuat!"
+    );
+
+
+    document.getElementById(
+        "ordersContainer"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   DISPLAY ORDERS
+========================= */
+
+function displayOrders(){
+
+    const container =
+        document.getElementById(
+            "ordersContainer"
+        );
+
+
+    if(orders.length === 0){
+
+        container.innerHTML = `
+
+            <div class="order-empty">
+
+                Belum ada pesanan.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        orders.map(
+            order => `
+
+        <div class="order-card">
+
+            <div class="order-header">
+
+                <div class="order-id">
+
+                    ${order.id}
+
+                </div>
+
+                <div class="order-status">
+
+                    ${order.status}
+
+                </div>
+
+            </div>
+
+
+            <div class="order-info">
+
+                <strong>
+                    Nama:
+                </strong>
+                ${order.name}
+
+                <br>
+
+
+                <strong>
+                    Nomor:
+                </strong>
+                ${order.phone}
+
+                <br>
+
+
+                <strong>
+                    Alamat:
+                </strong>
+                ${order.address}
+
+                <br>
+
+
+                <strong>
+                    Pembayaran:
+                </strong>
+                ${order.payment}
+
+                <br>
+
+
+                <strong>
+                    Voucher:
+                </strong>
+                ${order.voucher}
+
+                <br>
+
+
+                <strong>
+                    Total:
+                </strong>
+                ${rupiah(order.total)}
+
+                <br>
+
+
+                <strong>
+                    Waktu:
+                </strong>
+                ${order.date}
+
+            </div>
+
+        </div>
+
+    `
+        ).join("");
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProduct(){
+
+    const keyword =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    const cards =
+        document.querySelectorAll(
+            ".product-grid .card"
+        );
+
+
+    cards.forEach(card => {
+
+        const name =
+            card.dataset.name
+            .toLowerCase();
+
+
+        if(
+            name.includes(keyword)
+        ){
+
+            card.style.display = "";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "products"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   SEARCH ENTER
+========================= */
+
+document.getElementById(
+    "searchInput"
+).addEventListener(
+    "keyup",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            searchProduct();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   SCROLL PRODUCTS
+========================= */
+
+function scrollToProducts(){
+
+    document.getElementById(
+        "products"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================
+   SHOE MODAL
+========================= */
+
+function openShoeModal(){
+
+    selectedShoeSize = null;
+
+
+    document.getElementById(
+        "selectedSizeText"
+    ).textContent =
+        "Belum memilih ukuran";
+
+
+    document.querySelectorAll(
+        ".size-btn"
+    ).forEach(button => {
+
+        button.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    document.getElementById(
+        "shoeModal"
+    ).style.display = "flex";
+
+}
+
+
+/* =========================
+   CLOSE SHOE MODAL
+========================= */
+
+function closeShoeModal(){
+
+    document.getElementById(
+        "shoeModal"
+    ).style.display = "none";
+
+}
+
+
+/* =========================
+   SELECT SHOE SIZE
+========================= */
+
+function selectShoeSize(
+    size,
+    button
+){
+
+    selectedShoeSize = size;
+
+
+    document.querySelectorAll(
+        ".size-btn"
+    ).forEach(btn => {
+
+        btn.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    button.classList.add(
+        "selected"
+    );
+
+
+    document.getElementById(
+        "selectedSizeText"
+    ).textContent =
+        "Ukuran dipilih: " + size;
+
+}
+
+
+/* =========================
+   ADD SHOE
+========================= */
+
+function addShoeToCart(){
+
+    if(!selectedShoeSize){
+
+        showToast(
+            "Silakan pilih ukuran sepatu terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    const shoeName =
+        "Sepatu Sekolah Hitam - Ukuran " +
+        selectedShoeSize;
+
+
+    const existing =
+        cart.find(
+            item => item.name === shoeName
+        );
+
+
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+
+            name:shoeName,
+
+            price:125000,
+
+            image:
+                "sepatu sekolah hitam.jpeg",
+
+            qty:1
+
+        });
+
+    }
+
+
+    updateCart();
+
+    closeShoeModal();
+
+
+    showToast(
+        "Sepatu ukuran " +
+        selectedShoeSize +
+        " ditambahkan ke keranjang!"
+    );
+
+}
+
+
+/* =========================
+   CLOSE MODAL OUTSIDE
+========================= */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        const cartModal =
+            document.getElementById(
+                "cartModal"
+            );
+
+        const checkoutModal =
+            document.getElementById(
+                "checkoutModal"
+            );
+
+        const shoeModal =
+            document.getElementById(
+                "shoeModal"
+            );
+
+
+        if(event.target === cartModal){
+
+            closeCart();
+
+        }
+
+
+        if(event.target === checkoutModal){
+
+            closeCheckout();
+
+        }
+
+
+        if(event.target === shoeModal){
+
+            closeShoeModal();
+
+        }
+
+    }
+);
+
+
+
+
+updateCart();
+
+displayOrders();
+
+</script>
+
+</body>
+</html>
